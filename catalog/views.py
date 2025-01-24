@@ -1,5 +1,29 @@
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import get_object_or_404, render
 from .models import Book, Author, BookInstance, Genre
+from django.views import generic
+
+class BookListView(generic.ListView):
+    model = Book
+    paginate_by = 1
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+class AuthorListView(generic.ListView):
+    model = Author
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+
+def author_detail_view(request, primary_key):
+    author = get_object_or_404(Author, pk = primary_key)
+    return render(request, 'catalog/author_detail.html', context={'author': author})
+
+def book_detail_view(request, primary_key):
+    book = get_object_or_404(Book, pk=primary_key)
+    return render(request, 'catalog/book_detail.html', context={'book': book})
+
 
 def index(request):
     """
