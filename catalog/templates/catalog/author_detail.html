@@ -18,4 +18,5 @@
       <li>No books available for this author.</li>
     {% endfor %}
   </ul>
+  <a href="{% url 'author-delete' author.id %}">Delete author</a>
 {% endblock %}

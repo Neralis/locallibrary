@@ -9,6 +9,10 @@
   <p><strong>ISBN:</strong> {{ book.isbn }}</p>
   <p><strong>Language:</strong> {{ book.language }}</p>
   <p><strong>Genre:</strong> {{ book.genre.all|join:", " }}</p>
+  {% if user.is_authenticated and user.is_staff %}
+  <li><a href="{% url 'book-update' book.id %}">Update book</a></li>
+  <li><a href="{% url 'book-delete' book.id %}">Delete book</a></li>
+  {% endif %}
 
   <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
